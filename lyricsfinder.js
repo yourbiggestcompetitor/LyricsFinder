@@ -3,13 +3,10 @@ const search = document.getElementById("search");
 const result = document.getElementById("result");
 const favoritesContainer = document.getElementById("favorites");
 
-// API URL for lyrics
 const apiURL = "https://api.lyrics.ovh";
 
-// Create an empty array for storing favorite songs
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-// Event listener for form submission
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const searchValue = search.value.trim();
@@ -21,7 +18,6 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-// Function to search for songs
 async function searchSong(searchValue) {
   try {
     const searchResult = await fetch(`${apiURL}/suggest/${searchValue}`);
@@ -36,7 +32,6 @@ async function searchSong(searchValue) {
   }
 }
 
-// Function to display search results
 function showData(data) {
   result.innerHTML = `
     <ul class="song-list">
@@ -61,11 +56,9 @@ function showData(data) {
   `;
 }
 
-// Event listener for clicking on the "Add to Favorites" button and "Get Lyrics" button
 result.addEventListener("click", (e) => {
   const clickElement = e.target;
 
-  // Check if clicked element is the "Add to Favorites" button
   if (clickElement.classList.contains("favorite-btn")) {
     const artist = clickElement.getAttribute("data-artist");
     const songTitle = clickElement.getAttribute("data-songtitle");
@@ -73,7 +66,6 @@ result.addEventListener("click", (e) => {
     addToFavorites(artist, songTitle);
   }
 
-  // Check if clicked element is the "Get Lyrics" button
   if (clickElement.classList.contains("get-lyrics-btn")) {
     const artist = clickElement.getAttribute("data-artist");
     const songTitle = clickElement.getAttribute("data-songtitle");
@@ -81,9 +73,7 @@ result.addEventListener("click", (e) => {
   }
 });
 
-// Add song to favorites
 function addToFavorites(artist, songTitle) {
-  // Check if the song is already in the favorites
   const songExists = favorites.some(
     (song) => song.artist === artist && song.title === songTitle
   );
@@ -91,17 +81,14 @@ function addToFavorites(artist, songTitle) {
     const song = { artist, title: songTitle };
     favorites.push(song);
 
-    // Save to localStorage
     localStorage.setItem("favorites", JSON.stringify(favorites));
 
-    // Display the updated favorites
     displayFavorites();
   } else {
     alert("This song is already in your favorites!");
   }
 }
 
-// Display the favorites list
 function displayFavorites() {
   if (favorites.length === 0) {
     favoritesContainer.innerHTML = "<p>No favorite songs yet.</p>";
@@ -125,10 +112,8 @@ function displayFavorites() {
   }
 }
 
-// Initial call to display the favorites when the page loads
 displayFavorites();
 
-// Fetch lyrics for a song
 async function getLyrics(artist, songTitle) {
   try {
     const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
@@ -152,17 +137,13 @@ async function getLyrics(artist, songTitle) {
   }
 }
 
-// Back button functionality to go back to the search results
 function goBack() {
-  searchSong(search.value.trim()); // Refetch results using the current search term
+  searchSong(search.value.trim());
 }
 
-// JavaScript for toggling between light and dark mode
 document.getElementById("nightMode").addEventListener("click", function () {
-  // Toggle dark mode class on the body
   document.body.classList.toggle("dark-mode");
 
-  // Change the text of the button based on the mode
   if (document.body.classList.contains("dark-mode")) {
     this.textContent = "Switch";
   } else {
