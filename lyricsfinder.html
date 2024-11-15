@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lyrics Search</title>
+    <h1>LYRICS FINDER</h1>
+
+    <button id="nightMode">Night</button>
+    <link rel="stylesheet" href="lyricsfinder.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="search-bar">
+        <form id="form">
+          <input type="text" id="search" placeholder="Song or Artist" />
+          <button type="search">Search</button>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRViSkpvbmjpMA3P4HSawBt-tB1-Qea5o7-2g&s"
+            alt="img"
+          />
+        </form>
+      </div>
+
+      <div id="result"></div>
+
+      <section id="favorites">
+        <h2>Your Favorites</h2>
+        <p>No favorite songs yet.</p>
+      </section>
+    </div>
+
+    <script src="lyricsfinder.js"></script>
+  </body>
+</html>
